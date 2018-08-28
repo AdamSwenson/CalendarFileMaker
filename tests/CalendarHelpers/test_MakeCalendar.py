@@ -1,6 +1,6 @@
 import unittest
 
-from MakeCalendar import *
+from Executables.make_ics_file import *
 
 
 class MakeCalendarTests(unittest.TestCase):

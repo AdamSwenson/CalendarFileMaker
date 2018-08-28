@@ -3,8 +3,7 @@ Created by adam on 5/17/17
 """
 __author__ = 'adam'
 
-from CalendarHelpers.environment import *
-from CalendarHelpers.DataStructures import *
+from CalendarHelpers.DataStructures import Entry
 import csv
 import datetime
 
@@ -17,11 +16,14 @@ class InputDataHandler(object):
     def __init__(self):
         pass
 
-    def make_date(self, date_string):
+    @staticmethod
+    def make_date(date_string):
         """
         Processes the imported date of the event into the
-        expected date format
+        date format other stuff will expect
         Expected format: YYYYMMDD
+        Args:
+            date_string: Format M/D/YY
         """
         # return date_string
         d = [int(i) for i in date_string.split('/')]
@@ -32,7 +34,8 @@ class InputDataHandler(object):
         return dt.strftime("%Y%m%d")
         # return '%s%s%s' % (dt.year, dt.month, dt.day)
 
-    def make_time(self, time_string):
+    @staticmethod
+    def make_time(time_string):
         """
         Process the imported time of the event into the 
         expected time format
@@ -42,7 +45,8 @@ class InputDataHandler(object):
         mm = time_string[2:4] if len(time_string) > 2 else '00'
         return '%s:%s:00' % (hh,mm)
 
-    def make_name(self, input_name):
+    @staticmethod
+    def make_name(input_name):
         """
         Process the imported name into the expected formatting
         :param input_name: 
@@ -71,18 +75,22 @@ class CsvReader(InputDataHandler):
             reader = csv.DictReader(csvFile, fieldnames=self.columns, quotechar='|')
             for row in reader:
                 if row['name'] not in self.columns:
-                    event = Entry()
-                    event.name = row['name']
-                    event.date = row['date']
-                    event.start = row['start']
-                    event.end = row['end']
-                    event.location = row['location']
+                    try:
+                        event = Entry()
+                        event.name = row['name']
+                        event.date = row['date']
+                        event.start = row['start']
+                        event.end = row['end']
+                        event.location = row['location']
+                        out.append(event)
+                    except Exception:
+                        print("Could not capture %s %s" % (row['name'], row['date']))
 
                     # row['name'] = self.make_name(row['name'])
                     # row['date'] = self.make_date(row['date'])
                     # row['start'] = self.make_time(row['start'])
                     # row['end'] = self.make_time(row['end'])
-                    out.append(event)
+
             # out = out[1:] if len(out) == 2 else out
 
         return out

@@ -3,13 +3,10 @@ Created by adam on 5/18/17
 """
 __author__ = 'adam'
 
-import sys
 import unittest
-import rednose
 
-from CalendarHelpers.environment import *
+from environment import *
 # from environment import *
-from CalendarHelpers.DataStructures import *
 
 TEST_FILE_NAME = 'calendar_input.csv'
 TEST_FILE_PATH = '%s/%s' % (TESTS_PATH, TEST_FILE_NAME)

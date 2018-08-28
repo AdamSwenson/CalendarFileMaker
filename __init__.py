@@ -11,22 +11,21 @@ Created by adam on 5/17/17
 """
 __author__ = 'adam'
 
+
 import os
 import sys
 
 ROOT = os.getenv("HOME")
-BASE = '%s/Dropbox/FacultyGovernanceHelpers' % ROOT
 
-sys.path.append('%s/Dropbox/iPythonFiles/BaseClasses' % ROOT) #the directory that contains various common custom classes
+# The folder containing environment.py
+BASE = os.path.abspath(os.path.dirname(__file__))
 
-DATAFOLDER = BASE + '/Data'
+INPUTFOLDER = BASE + '/input'
+OUTPUTFOLDER = BASE + '/output'
 
-#Project folders
+# Source files
 CALENDAR_TOOLS_PATH = "%s/CalendarHelpers" % BASE
-sys.path.append(CALENDAR_TOOLS_PATH) #the directory that contains the calendar tools
+sys.path.append(CALENDAR_TOOLS_PATH) #the directory that contains various common custom classes
 
 #Test  folders
 TESTS_PATH = "%s/tests" % BASE
-
-if __name__ == '__main__':
-    pass

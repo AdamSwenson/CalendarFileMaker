@@ -2,11 +2,9 @@
 Created by adam on 5/18/17
 """
 __author__ = 'adam'
-import sys
 import unittest
-import rednose
 
-from CalendarHelpers.environment import *
+from environment import *
 # from environment import *
 from CalendarHelpers.InputHandlers import *
 
