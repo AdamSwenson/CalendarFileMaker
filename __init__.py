@@ -20,12 +20,12 @@ ROOT = os.getenv("HOME")
 # The folder containing environment.py
 BASE = os.path.abspath(os.path.dirname(__file__))
 
-INPUTFOLDER = BASE + '/input'
-OUTPUTFOLDER = BASE + '/output'
+# INPUTFOLDER = BASE + '/input'
+# OUTPUTFOLDER = BASE + '/output'
 
 # Source files
 CALENDAR_TOOLS_PATH = "%s/CalendarHelpers" % BASE
 sys.path.append(CALENDAR_TOOLS_PATH) #the directory that contains various common custom classes
 
 #Test  folders
-TESTS_PATH = "%s/tests" % BASE
+# TESTS_PATH = "%s/tests" % BASE

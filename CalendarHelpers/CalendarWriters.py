@@ -2,26 +2,13 @@
 Created by adam on 5/17/17
 """
 import ics
+import CalendarHelpers.DataStructures
 
 __author__ = 'adam'
 
 
-class CalendarFileWriter(object):
-    """
-    Parent class for all tools which write to calendar file formats
-    
-    """
-    def __init__(self):
-        pass
-
-
-
-if __name__ == '__main__':
-    pass
-
-
 class IcsMaker( object ):
-    """Wraps an ics.Calendar"""
+    """Wraps the ics library to make a .ics file from the input data"""
 
     def __init__( self ):
         self.calendar = ics.Calendar()
@@ -31,19 +18,25 @@ class IcsMaker( object ):
         # append step doesn't work. This alleviates the problem.
         self.calendar.events = [ ]
 
-    def make_event( self, data ):
-        """Creates an ics.Event object from the provided data"""
+    def make_event( self, entry ):
+        """Creates an ics.Event object from the provided entry"""
         e = ics.Event()
-        e.name = data.name
-        e.begin = '%s %s' % (data.date, data.start)
-        e.end = '%s %s' % (data.date, data.end)
+        e.name = entry.name
+        e.begin = '%s %s' % (entry.date, entry.start)
+        e.end = '%s %s' % (entry.date, entry.end)
         return e
 
-    def add_event( self, data ):
-        """Creates an data from the data and adds it to the calendar"""
-        event = self.make_event( data )
+    def add_event( self, entry: CalendarHelpers.DataStructures.Entry ):
+        """Creates an entry from the entry and adds it to the calendar
+        :type entry: CalendarHelpers.DataStructures.Entry
+        """
+        event = self.make_event( entry )
         self.calendar.events.append( event )
 
     def write_to_file( self, output_file_path ):
         with open( output_file_path, 'w' ) as my_file:
             my_file.writelines( self.calendar )
+
+
+if __name__ == '__main__':
+    pass
